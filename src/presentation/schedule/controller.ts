@@ -2,13 +2,15 @@ import { Request,Response } from "express";
 import { ScheduleDTO } from "../../domain/dtos/schedule.dto";
 import { ScheduleRepository } from "../../domain/repositories/schedule.repository";
 import { idDTO } from "../../domain/dtos/id.dto";
+import { Schedule } from "../../domain/entities/schedule";
 
 export class ScheduleController{
     constructor(
         private readonly scheduleRepository:ScheduleRepository
     ){}
     getSchedule = (req:Request,res:Response) => {
-        return this.scheduleRepository.get(Number(req.query.q))
+        const id = String(req.params.id)
+        return this.scheduleRepository.get(id)
             .then(response => {
                 res.json(response)
                 res.end()
@@ -24,12 +26,21 @@ export class ScheduleController{
         return res.json(scheduleDTO)
     }
     editSchedule = (req:Request,res:Response) =>{
-        const body = req.body
-        this.scheduleRepository.update(body)
+        const [error,scheduleDTO] = ScheduleDTO.create(req.body)
+        if(error) return res.status(400).json("Bad request")
+        return this.scheduleRepository.update(scheduleDTO as ScheduleDTO)
+        .then(response => {
+            res.json(response)
+            console.log(response)
+            return res.end()
+        })
     }
     deleteSchedule = (req:Request,res:Response) =>{
-        const id = parseInt(req.params.id)
-        this.scheduleRepository.delete(id)
+        const id = String(req.params.id)
+        return this.scheduleRepository.delete(id)
+            .then(response => {
+            res.json(response)
+            return res.end()
+        })  
     }
-
 }

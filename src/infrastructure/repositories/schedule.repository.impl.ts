@@ -7,18 +7,16 @@ export class ScheduleRepositoryImp implements ScheduleRepository{
     constructor(
         private readonly datasource:ScheduleDatasource
     ){}
-    add(scheduleDTO: ScheduleDTO): Promise<string|Schedule> {
+    add = (scheduleDTO: ScheduleDTO): Promise<string | Schedule | Schedule[]>=> {
         return this.datasource.add(scheduleDTO)
     }
-    get(id: number): Promise<string | Schedule[] | Schedule> {
+    get = (id: string): Promise<string | Schedule | Schedule[]> => {
         return this.datasource.get(id)
     }
-    update(scheduleDTO: ScheduleDTO): Promise<string | Schedule> {
+    update = (scheduleDTO: ScheduleDTO): Promise<string | Schedule | Schedule[]> => {
         return this.datasource.update(scheduleDTO)
     }
-    delete(id: number): Promise<Schedule| string> {
+    delete = (id: string): Promise<string | Schedule | Schedule[]> => {
         return this.datasource.delete(id)
     }
-
-
 }

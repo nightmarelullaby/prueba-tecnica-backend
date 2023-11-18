@@ -20,7 +20,7 @@ export class Server{
     start(){
         this.app.use(express.json())
         this.app.use(cors())
-        this.app.use(urlencoded({extended:true}))
+        this.app.use(urlencoded({extended:false}))
         this.app.use(this.routes)
         this.app.listen(this.port,() => {
             console.log("Server running")
