@@ -9,8 +9,9 @@ export class ScheduleController{
         private readonly scheduleRepository:ScheduleRepository
     ){}
     getSchedule = (req:Request,res:Response) => {
-        const id = String(req.params.id)
-        return this.scheduleRepository.get(id)
+        let q = typeof req.query.q === "string" ? String(req.query.q) : undefined
+        console.log(req.query)
+        return this.scheduleRepository.get(q)
             .then(response => {
                 res.json(response)
                 res.end()
@@ -36,7 +37,7 @@ export class ScheduleController{
         })
     }
     deleteSchedule = (req:Request,res:Response) =>{
-        const id = String(req.params.id)
+        const id = req.params.id
         return this.scheduleRepository.delete(id)
             .then(response => {
             res.json(response)

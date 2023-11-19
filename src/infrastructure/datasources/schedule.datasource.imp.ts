@@ -11,7 +11,9 @@ export class ScheduleDatasourceImp implements ScheduleDatasource{
         if('name' && 'id' in scheduleDTO){
             return PostgresDatabase.pool.query(`
             update schedule
-            set name=$1, email=$2, phone_number=$3
+            set name=$1,
+            email=$2,
+            phone_number=$3
             where id = $4;`,[scheduleDTO.name,scheduleDTO.email,scheduleDTO.phone_number,scheduleDTO.id])
             .then(response => {
                 console.log("here1")
@@ -30,25 +32,24 @@ export class ScheduleDatasourceImp implements ScheduleDatasource{
         
     }
 
-    async get(id: string): Promise<Schedule[] | Schedule> {
-        console.log(id)
+    async get(id?: string ): Promise<Schedule[] | Schedule> {
         if(!id) {
             return PostgresDatabase.pool.query(`select * from schedule;`)
                 .then(response => {
-                    console.log(response.rows)
-                    return response.rows
-                })
-        }
-
-        return PostgresDatabase.pool.query(`select * from schedule where id = ${id};`)
-            .then(response => {
+                console.log(response.rows,"here1")
                 return response.rows
-            })
+                })    
+        }
+        return PostgresDatabase.pool.query(`select * from schedule where id = $1;`,[id])
+            .then(response => {
+                console.log(response.rows)
+                return response.rows
+            })            
         
         
     }
     async delete(id: string): Promise<Schedule | Schedule[] | string>  {
-        return PostgresDatabase.pool.query(`delete from schedule where id = ${id}` )     
+        return PostgresDatabase.pool.query(`delete from schedule where id = $1`,[id] )     
             .then(response => {
                 return response.rows
             })
