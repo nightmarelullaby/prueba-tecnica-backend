@@ -9,7 +9,6 @@ interface Options {
 }
 export class PostgresDatabase{
     static pool:Pool
-
     static connect(options:Options):Pool{
         const {user,host,password,database,port} = options
         try{
