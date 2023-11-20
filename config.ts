@@ -1,3 +1,5 @@
+import 'dotenv/config'; 
+
 export const PostgresConfig = {
     user:String(process.env.DB_USERNAME),
     host:"localhost",
@@ -5,3 +7,4 @@ export const PostgresConfig = {
     database:String(process.env.DB),
     port:Number(process.env.DB_PORT)
 }
+

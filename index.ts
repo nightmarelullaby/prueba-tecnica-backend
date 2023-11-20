@@ -7,7 +7,6 @@ import 'dotenv/config';
 (() => {
     main()
 })()
-
 function main(){
     //Define database config here
 
