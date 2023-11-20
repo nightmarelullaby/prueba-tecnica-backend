@@ -11,7 +11,7 @@ create database schedule;
 Go to \Program Files\PostgreSQL\16\bin throught cmd and paste this:
 
 ```
-pspl -U postgres -W -h localhost schedule < \dbbackup\restore.sql
+pspl -U postgres -W -h localhost schedule < ...path\dbbackup\restore.sql
 ```
 
 path is basically the \restore.sql file that comes in \dbbackup folder
