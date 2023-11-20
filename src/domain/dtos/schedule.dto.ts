@@ -1,3 +1,5 @@
+
+
 export class ScheduleDTO{
     private constructor(
         public name:string,
@@ -6,7 +8,7 @@ export class ScheduleDTO{
         public id?:string
     ){}
 
-    static create(object:{[key:string | number]:any |unknown}):[string?,ScheduleDTO?]{
+    static create(object:{[key:string]:string}):[string?,ScheduleDTO?]{
         const {name,email,phone_number,id} = object
         if(!name) return ["Name is missing",undefined];
         if(!email) return ["email is missing",undefined];

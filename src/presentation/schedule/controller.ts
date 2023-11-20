@@ -9,8 +9,9 @@ export class ScheduleController{
         private readonly scheduleRepository:ScheduleRepository
     ){}
     getSchedule = (req:Request,res:Response) => {
-        let q = typeof req.query.q === "string" ? String(req.query.q) : undefined
-        return this.scheduleRepository.get(q)
+        const [error,id] = idDTO.create(req.query.q)
+        if(error) return res.status(400).json("Bad request")
+        return this.scheduleRepository.get(id)
             .then(response => {
                 res.json(response)
                 res.end()

@@ -18,7 +18,7 @@ export class PostgresDatabase{
                 password:password,
                 database:database,
                 port:port
-            }).on("acquire",() =>{
+            }).on("connect",() =>{
                 console.log("Postgres running")
             })
 
