@@ -9,7 +9,7 @@ export class ScheduleController{
         private readonly scheduleRepository:ScheduleRepository
     ){}
     getSchedule = (req:Request,res:Response) => {
-        const [error,id] = idDTO.create(false,req.query.q,)
+        const [id,error] = idDTO.create(false,req.query.q,)
         if(error) return res.status(400).json("Bad request")
         return this.scheduleRepository.get(id)
             .then(response => {
@@ -37,9 +37,9 @@ export class ScheduleController{
         })
     }
     deleteSchedule = (req:Request,res:Response) =>{
-        const [error,id] = idDTO.create(true,req.params.id)
+        const [id,error] = idDTO.create(true,req.params.id)
         console.log(error)
-        if(!id) return res.status(400).json("Bad request")
+        if(error) return res.status(400).json("Bad request")
         return this.scheduleRepository.delete(id)
             .then(response => {
             res.json(response)
