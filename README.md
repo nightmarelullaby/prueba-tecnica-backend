@@ -1,4 +1,4 @@
-#### Creating database
+## Creating database
 
 ```
 create database schedule;
@@ -6,7 +6,7 @@ create database schedule;
 
 -------------------------------------------------------
 
-#### Restoring
+## Restoring
 
 Go to \Program Files\PostgreSQL\16\bin throught cmd and paste this:
 
@@ -18,7 +18,7 @@ path is basically the \restore.sql file that comes in \dbbackup folder
 
 ------------------------------------------------------
 
-#### Configuring db
+## Configuring db
 
 Go to config.ts file and put your postgres db config
 
