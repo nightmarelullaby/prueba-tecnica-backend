@@ -10,7 +10,6 @@ export class ScheduleController{
     ){}
     getSchedule = (req:Request,res:Response) => {
         let q = typeof req.query.q === "string" ? String(req.query.q) : undefined
-        console.log(req.query)
         return this.scheduleRepository.get(q)
             .then(response => {
                 res.json(response)

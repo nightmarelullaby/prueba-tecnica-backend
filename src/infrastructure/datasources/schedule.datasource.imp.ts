@@ -4,7 +4,6 @@ import { ScheduleDatasource } from "../../domain/datasources/schedule.datasource
 import { ScheduleDTO } from "../../domain/dtos/schedule.dto";
 import { Schedule } from "../../domain/entities/schedule";
 import { v4 as uuidv4 } from 'uuid';
-type Query = QueryResult<any> | Promise<ScheduleDTO[]> ;
 
 export class ScheduleDatasourceImp implements ScheduleDatasource{
     async update(scheduleDTO: ScheduleDTO): Promise<string | Schedule[] | Schedule> {
@@ -16,7 +15,6 @@ export class ScheduleDatasourceImp implements ScheduleDatasource{
             phone_number=$3
             where id = $4;`,[scheduleDTO.name,scheduleDTO.email,scheduleDTO.phone_number,scheduleDTO.id])
             .then(response => {
-                console.log("here1")
                 return response.rows
             })
         }
@@ -36,13 +34,11 @@ export class ScheduleDatasourceImp implements ScheduleDatasource{
         if(!id) {
             return PostgresDatabase.pool.query(`select * from schedule;`)
                 .then(response => {
-                console.log(response.rows,"here1")
                 return response.rows
                 })    
         }
         return PostgresDatabase.pool.query(`select * from schedule where id = $1;`,[id])
             .then(response => {
-                console.log(response.rows)
                 return response.rows
             })            
         

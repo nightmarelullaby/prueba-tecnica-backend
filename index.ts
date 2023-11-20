@@ -1,19 +1,17 @@
 import { PostgresDatabase } from "./data/postgres/pool"
 import { AppRoutes } from "./src/presentation/route"
 import { Server } from "./src/presentation/server"
+import { PostgresConfig } from "./config";
+import 'dotenv/config'; 
 
 (() => {
     main()
 })()
 
 function main(){
-    PostgresDatabase.connect({
-            user:"postgres",
-            host:"localhost",
-            password:"12345",
-            database:"schedule",
-            port:5432
-    })
+    //Define database config here
+
+    PostgresDatabase.connect(PostgresConfig)
     new Server({
         port:4000,
         routes:AppRoutes.routes
