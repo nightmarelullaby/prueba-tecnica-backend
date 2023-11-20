@@ -22,7 +22,6 @@ export class ScheduleDatasourceImp implements ScheduleDatasource{
     }
  
     async add(scheduleDTO: ScheduleDTO): Promise<string  | Schedule[] | Schedule> {
-        
         return PostgresDatabase.pool.query(`insert into schedule (id,name,email,phone_number) values($1,$2,$3,$4)` , [uuidv4(),scheduleDTO.name,scheduleDTO.email,scheduleDTO.phone_number] )
         .then(response => {
             return response.rows
