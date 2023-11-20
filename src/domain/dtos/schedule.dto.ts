@@ -1,4 +1,4 @@
-
+import { validate } from 'uuid';
 
 export class ScheduleDTO{
     private constructor(
@@ -15,6 +15,7 @@ export class ScheduleDTO{
         if(!phone_number) return ["phone_number is missing",undefined];
         if(!new RegExp(/^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/g).test(phone_number)) return ["Invalid phone number",undefined];
         if(!new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g).test(email)) return ["Invalid email",undefined];
+        if(id && !validate(id)) return ["Id is invalid",undefined]
 
         return [undefined,new ScheduleDTO(name,email,phone_number,id)]
         
